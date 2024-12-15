@@ -67,7 +67,7 @@ UpdatePhi <- function(parameters){
 UpdateZeta <- function(parameters, counts,ncores = cores_num){
   Zetaj_calculation <- function(j,counts, parameters){
     Q_zetaj <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_j = exp(parameters$ksi + x + as.vector(parameters$beta %*% parameters$U[j,]) + 
                      as.vector(parameters$alpha[j,] %*% t(parameters$V)) + as.vector(parameters$gamma[j,] %*% t(parameters$C)))
       }else{
@@ -87,7 +87,7 @@ UpdateZeta <- function(parameters, counts,ncores = cores_num){
       }
     }
     Q_zetaj_gr <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_j = exp(parameters$ksi + x + as.vector(parameters$beta %*% parameters$U[j,]) + 
                      as.vector(parameters$alpha[j,] %*% t(parameters$V)) + as.vector(parameters$gamma[j,] %*% t(parameters$C)))
       }else{
@@ -116,7 +116,7 @@ UpdateZeta <- function(parameters, counts,ncores = cores_num){
 UpdateKsi <-function(parameters , counts,ncores = cores_num){
   Ksii_calculation <- function(i,counts, parameters){
     Q_ksii <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_i = exp(x + parameters$zeta + as.vector(parameters$beta[i,] %*% t(parameters$U)) + 
                      as.vector(parameters$alpha %*% parameters$V[i,]) + as.vector(parameters$gamma %*% parameters$C[i,]))
       }else{
@@ -137,7 +137,7 @@ UpdateKsi <-function(parameters , counts,ncores = cores_num){
       }
     }
     Q_ksii_gr <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_i = exp(x + parameters$zeta + as.vector(parameters$beta[i,] %*% t(parameters$U)) + 
                      as.vector(parameters$alpha %*% parameters$V[i,]) + as.vector(parameters$gamma %*% parameters$C[i,]))
       }else{
@@ -168,7 +168,7 @@ CalculationMu <- function(parameters){
   #U_H_V = parameters$U%*%parameters$H%*%t(parameters$V)
   beta_U = t(parameters$beta %*% t(parameters$U))
   alpha_V = parameters$alpha %*% t(parameters$V)
-  if(!is.na(parameters$gamma)){
+  if(sum(is.na(parameters$gamma))==0){
     gamma_C = parameters$gamma %*% t(parameters$C) 
   }else{
     gamma_C = 0
@@ -326,7 +326,7 @@ UpdateGamma <- function(parameters,counts,ncores = cores_num){
 UpdateU<-function(parameters,counts,ncores = 10){
   Uj_calculation <- function(j,counts, parameters){
     Q_uj <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_j = exp(parameters$ksi + parameters$zeta[j] + as.vector(parameters$beta %*% x) + 
                      as.vector(parameters$alpha[j,] %*% t(parameters$V)) + 
                      as.vector(parameters$gamma[j,] %*% t(parameters$C)))
@@ -343,7 +343,7 @@ UpdateU<-function(parameters,counts,ncores = 10){
       return(inter3 - sum(inter2))
     }
     Q_uj_gr <- function(x){
-      if(!is.na(parameters$gamma)){
+      if(sum(is.na(parameters$gamma))==0){
         mu_j = exp(parameters$ksi + parameters$zeta[j] + as.vector(parameters$beta %*% x) + 
                      as.vector(parameters$alpha[j,] %*% t(parameters$V)) + 
                      as.vector(parameters$gamma[j,] %*% t(parameters$C)))
@@ -392,7 +392,7 @@ QfunctionCalculation <- function(parameters,counts){
   if(parameters$sigmaGamma!=0){
     Q = Q - sum(parameters$gamma * parameters$gamma)/(2*parameters$sigmaGamma)
   }
-  if(parameters$flag_U & parameters$sigmaU!=0){
+  if(parameters$flag_U  & parameters$sigmaU!=0){
     Q = Q - sum(diag(parameters$U%*%t(parameters$U)))/(2*parameters$sigmaU)
   }
   return(Q)
@@ -405,8 +405,8 @@ ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_nam
   parameters$nsamples = dim(counts)[2]
   parameters$phi = rowSums(counts==0)/parameters$nsamples
   parameters$thelta = rep(5,parameters$nfeatures)
-  parameters$U = as.matrix(read.csv(paste(data_path,"GeneEmbedding.csv",sep="_"),sep = "/"), header=FALSE))
-  parameters$V = as.matrix(read.csv(paste(data_path,"CellEmbedding.csv",sep="_"),sep = "/"), header=FALSE))
+  parameters$U = as.matrix(read.csv(paste(data_path,"GeneEmbedding.csv",sep="_"),sep = "/"), header=FALSE)
+  parameters$V = as.matrix(read.csv(paste(data_path,"CellEmbedding.csv",sep="_"),sep = "/"), header=FALSE)
   parameters$K = dim(parameters$U)[2]
   parameters$L = dim(parameters$V)[2]
   parameters$Z = matrix(0, nrow = parameters$nfeatures,ncol = parameters$nsamples)
