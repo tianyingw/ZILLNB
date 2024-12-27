@@ -61,9 +61,11 @@ UpdateThelta <- function(parameters,counts,ncores = cores_num){
   stopCluster(cl)
   return(result)
 }
+
 UpdatePhi <- function(parameters){
   return(rowMeans(parameters$Z))
 }
+
 UpdateZeta <- function(parameters, counts,ncores = cores_num){
   Zetaj_calculation <- function(j,counts, parameters){
     Q_zetaj <- function(x){
