@@ -25,7 +25,7 @@ The proposed ZILLNB model consists of three key components. First, we employ a d
 
 ### 2.1 Package installation
 
-For the R platform, the core dependent packages are. 
+For the R platform, the core dependent packages are as follows: 
 
 ``` R
 packages <- c("gsl", "pscl", "turner", "dplyr", "Matrix", "doParallel", "optimParallel")
@@ -37,7 +37,7 @@ if(length(packages_to_install) > 0) {
   message("All packages are installed!")
 }
 ```
-For the Python platform, users are highly recommended to install packages via conda.
+For the Python platform, it is highly recommended that users install packages via conda.
 ``` Python
 conda create -n denoise python=3.9
 conda activate denoise
