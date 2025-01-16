@@ -399,16 +399,20 @@ QfunctionCalculation <- function(parameters,counts){
   }
   return(Q)
 }
+
 ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_name = "",data_path = "/home/ZILLNB/test_data/",
-                         sigmaKsi = 100,sigmaZeta = 100,sigmaU = 100,flag_U = F, record_path = "/home/ZILLNB/",record = F){
+                         sigmaKsi = 100,sigmaZeta = 100,sigmaU = 100,flag_U = F,sigmaGamma = 100, record_path = "/home/ZILLNB/",record = F){
+  if(!dir.exists(record_path)){
+    dir.create(record_path)
+  }
   parameters = list()
   parameters$flag_U = flag_U
   parameters$nfeatures = dim(counts)[1]
   parameters$nsamples = dim(counts)[2]
   parameters$phi = rowSums(counts==0)/parameters$nsamples
   parameters$thelta = rep(5,parameters$nfeatures)
-  parameters$U = as.matrix(read.csv(paste(data_path,"GeneEmbedding.csv",sep="_"),sep = "/"), header=FALSE)
-  parameters$V = as.matrix(read.csv(paste(data_path,"CellEmbedding.csv",sep="_"),sep = "/"), header=FALSE)
+  parameters$U = as.matrix(read.csv(paste(data_path,"GeneEmbedding.csv",sep = "/"), header=FALSE))
+  parameters$V = as.matrix(read.csv(paste(data_path,"CellEmbedding.csv",sep = "/"), header=FALSE))
   parameters$K = dim(parameters$U)[2]
   parameters$L = dim(parameters$V)[2]
   parameters$Z = matrix(0, nrow = parameters$nfeatures,ncol = parameters$nsamples)
@@ -429,12 +433,13 @@ ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_nam
   parameters$sigmaKsi = sigmaKsi
   parameters$sigmaZeta = sigmaZeta
   parameters$sigmaU = sigmaU
+  parameters$sigmaGamma = sigmaGamma
   print("Parameters Initiation Completed!")
   Q_loss = QfunctionCalculation(parameters,counts)
   if(!dir.exists(record_path) & record){
     system(paste("mkdir ",record_path,sep = ""))
   }
-  for(j in 1:max_inter){
+  for(j in 1:max_iter){
     parameters$Z = UpdateZ(parameters,counts)
     print("Z Updated!")
     print("E Step Completed!")
