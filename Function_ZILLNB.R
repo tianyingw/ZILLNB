@@ -399,9 +399,6 @@ QfunctionCalculation <- function(parameters,counts){
 }
 ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_name = "",data_path = "/home/ZILLNB/test_data/",
                          sigmaKsi = 100,sigmaZeta = 100,sigmaU = 100,flag_U = F,sigmaGamma = 100, record_path = "/home/ZILLNB/",record = F){
-  if(!dir.exists(record_path)){
-    dir.create(record_path)
-  }
   parameters = list()
   parameters$flag_U = flag_U
   parameters$nfeatures = dim(counts)[1]
