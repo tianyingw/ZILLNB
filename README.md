@@ -54,7 +54,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
 
 
 ## 3 ZILLNB Running demo
-Here we used the scRNA-seq dataset from mouse brain as test data[1]
+Here we used the scRNA-seq dataset from mouse brain as test data[1], which can be downloaded via GEO Accession (GSE60361).
 ### Case1: Without Covariates
 ```R
   source("/home/ZILLNB/Function_ZILLNB.R")
