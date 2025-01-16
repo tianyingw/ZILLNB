@@ -62,8 +62,8 @@ Here we used the scRNA-seq dataset from mouse brain as test data[1], which can b
   path = "/home/ZILLNB/test_data/"
   file_cell = "data2CE.csv"
   file_gene = "data2GE.csv"
-  load(paste0(path,"sceMouseBrain.RData"))
-
+  sceMouseBrain = scRNAseq::ZeiselBrainData()
+  #load(paste0(path,"sceMouseBrain.RData"))
   counts = sceMouseBrain@assays$data@listData$counts
   counts = counts[which(rowSums(counts!=0)>=10),]
   cores_num = 10
