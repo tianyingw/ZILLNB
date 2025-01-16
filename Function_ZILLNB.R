@@ -61,11 +61,9 @@ UpdateThelta <- function(parameters,counts,ncores = cores_num){
   stopCluster(cl)
   return(result)
 }
-
 UpdatePhi <- function(parameters){
   return(rowMeans(parameters$Z))
 }
-
 UpdateZeta <- function(parameters, counts,ncores = cores_num){
   Zetaj_calculation <- function(j,counts, parameters){
     Q_zetaj <- function(x){
@@ -399,7 +397,6 @@ QfunctionCalculation <- function(parameters,counts){
   }
   return(Q)
 }
-
 ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_name = "",data_path = "/home/ZILLNB/test_data/",
                          sigmaKsi = 100,sigmaZeta = 100,sigmaU = 100,flag_U = F,sigmaGamma = 100, record_path = "/home/ZILLNB/",record = F){
   if(!dir.exists(record_path)){
@@ -426,14 +423,16 @@ ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_nam
     parameters$C = cell_meta
     parameters$Cd = dim(parameters$C)[2]
     parameters$gamma = matrix(0,parameters$nfeatures,parameters$Cd)
+    parameters$sigmaGamma = sigmaGamma
   }else{
     parameters$gamma = NA
+    parameters$sigmaGamma = 0
   }
   parameters$Mu = CalculationMu(parameters)
   parameters$sigmaKsi = sigmaKsi
   parameters$sigmaZeta = sigmaZeta
   parameters$sigmaU = sigmaU
-  parameters$sigmaGamma = sigmaGamma
+  #parameters$sigmaGamma = sigmaGamma
   print("Parameters Initiation Completed!")
   Q_loss = QfunctionCalculation(parameters,counts)
   if(!dir.exists(record_path) & record){
@@ -455,10 +454,12 @@ ZILLNB_Fitting<-function(counts,cellmeta=NA,max_iter = 5,cores_num = 10,file_nam
     parameters$alpha = UpdateAlpha(parameters,counts)
     parameters$Mu = CalculationMu(parameters)
     print("Coefficient Alpha Updated!")
-    
-    parameters$gamma = UpdateGamma(parameters,counts)
-    parameters$Mu = CalculationMu(parameters)
-    print("Coefficient Gamma Updated!")
+    if(!is.na(parameters$gamma)){
+      parameters$gamma = UpdateGamma(parameters,counts)
+      parameters$Mu = CalculationMu(parameters)
+      print("Coefficient Gamma Updated!")
+    }
+
     
     parameters$beta = UpdateBeta(parameters,counts)
     parameters$Mu = CalculationMu(parameters)
