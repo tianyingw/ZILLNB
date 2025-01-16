@@ -54,7 +54,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
 
 
 ## 3 ZILLNB Running demo
-Here we used the scRNA-seq dataset from mouse brain as test data[1], which can be downloaded via GEO Accession (GSE60361) or via scRNAseq package(R).
+Here we used the scRNA-seq dataset from mouse brain as test data[1], which can be downloaded via GEO Accession (GSE60361) or scRNAseq package(R).
 ### Case1: Without Covariates
 ```R
   source("/home/ZILLNB/Function_ZILLNB.R")
@@ -63,8 +63,9 @@ Here we used the scRNA-seq dataset from mouse brain as test data[1], which can b
   file_cell = "data2CE.csv"
   file_gene = "data2GE.csv"
   sceMouseBrain = scRNAseq::ZeiselBrainData()
+  counts = sceMouseBrain@assays@data$counts
   #load(paste0(path,"sceMouseBrain.RData"))
-  counts = sceMouseBrain@assays$data@listData$counts
+  #counts = sceMouseBrain@assays$data@listData$counts
   counts = counts[which(rowSums(counts!=0)>=10),]
   cores_num = 10
 
