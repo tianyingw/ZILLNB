@@ -58,11 +58,15 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
 ```R
   source("/home/ZILLNB/Function_ZILLNB.R")
   cores_num = 10
-  path = "/home/ZILLNB/test_data"
+  path = "/home/ZILLNB/test_data/"
   file_cell = "data2CE.csv"
   file_gene = "data2GE.csv"
-  counts =  read.delim(paste(path,"yourdata.txt",sep = "/),row.names = 1)
+  load(paste0(path,"/sceMouseBrain.RData"))
+
+  counts = sceMouseBrain@assays$data@listData$counts
   counts = counts[which(rowSums(counts!=0)>=10),]
+  cores_num = 10
+
 
   ## Data Preparation
   data1 = log1p(sweep(counts,2,colSums(counts),FUN = "/")*1e4)
