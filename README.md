@@ -61,7 +61,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
   path = "/home/ZILLNB/test_data/"
   file_cell = "data2CE.csv"
   file_gene = "data2GE.csv"
-  load(paste0(path,"/sceMouseBrain.RData"))
+  load(paste0(path,"sceMouseBrain.RData"))
 
   counts = sceMouseBrain@assays$data@listData$counts
   counts = counts[which(rowSums(counts!=0)>=10),]
@@ -78,7 +78,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
   data_pca = pca$x[,1:500]
   write.csv(data_pca,paste(path,file_gene,sep = "/"),quote = FALSE)
   print("Data Trasformation Completed!")
-
+  ## path2 is the path of your conda environment(check by "conda info --envs" in terminal)
   ## Calling for latent factor estimation step
   system(paste("path2/.conda/envs/denoise/bin/python3 ZILLNB_model.py --cell_data_name",
                file_cell,"--wdir",path,"--gene_data_name",file_gene,"--cell_model_name","CellEmbedding.pkl",
@@ -86,7 +86,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
                "--out_gene_name","GeneEmbedding.csv",sep = " "))
 
   ## Calling for fitting step
-  parameters = ZILLNB_Fitting(counts,cores_num = cores_num,data_path = path,record_path = "/home/ZILLNB/test_data/record/",record = T)
+  parameters = ZILLNB_Fitting(counts,cores_num = cores_num,data_path = path,record_path = paste0(path,"record/"),record = T)
   
 ```
 
