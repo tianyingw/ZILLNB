@@ -128,6 +128,7 @@ Here we used the scRNA-seq dataset from mouse brain as test data[2], which can b
 
 ## Reference
 [1] Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework
+
 [2] Zeisel A, Muñoz-Manchado AB, Codeluppi S, et al (2015) Brain structure. Cell types in the mouse cortex and hippocampus revealed by single-cell RNA-seq. Science 347:1138–42. https://doi.org/10.1126/science.aaa1934
 
 
