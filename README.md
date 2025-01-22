@@ -19,7 +19,7 @@ Structural illustration of link function in ZINB model fitting. The green square
 ## 1 Introduction to ZILLNB
 ![fig1_14_7](https://github.com/user-attachments/assets/8ec08e71-8d38-4128-950d-ca00ece089df)
 The proposed ZILLNB model consists of three key components. First, we employ a deep learning approach that integrates InfoVAE and GAN to extract latent cell-wise and gene-wise information simultaneously. Second, these learned latent factor matrices are used to fit a zero-inflated negative binomial (ZINB) model, where the latent factors and the coefficients of interest are iteratively updated using the expectation-maximization (EM) algorithm. This process removes noise introduced by cell-specific sampling effects (e.g., uneven library sizes) and gene-specific variation (e.g., heterogeneity across genes). The adjusted mean parameters are then used to generate a dense denoised and imputed matrix. Additionally, we provide a method to recover the count matrix based on the denoised distribution. For more information on COMSE, we recommend the user to check the following article:
-> ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework(https://doi.org/xxxxx)
+> ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework(https://doi.org/xxxxx)[1]
 
 ## 2 Requirements
 
@@ -54,7 +54,7 @@ The input of ZILLNB is the **expression matrix** of scRNA-seq RNA-seq data:
 
 
 ## 3 ZILLNB Running demo
-Here we used the scRNA-seq dataset from mouse brain as test data[1], which can be downloaded via GEO Accession (GSE60361) or scRNAseq package(R).
+Here we used the scRNA-seq dataset from mouse brain as test data[2], which can be downloaded via GEO Accession (GSE60361) or scRNAseq package(R).
 ### Case1: Without Covariates
 ```R
   source("/home/ZILLNB/Function_ZILLNB.R")
@@ -127,7 +127,7 @@ Here we used the scRNA-seq dataset from mouse brain as test data[1], which can b
 ```
 
 ## Reference
-[1] # ZILLNB
-ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework
+[1] Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework
+[2] Zeisel A, Muñoz-Manchado AB, Codeluppi S, et al (2015) Brain structure. Cell types in the mouse cortex and hippocampus revealed by single-cell RNA-seq. Science 347:1138–42. https://doi.org/10.1126/science.aaa1934
 
 
