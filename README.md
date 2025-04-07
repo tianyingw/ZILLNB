@@ -75,8 +75,8 @@ Here we used the scRNA-seq dataset from mouse brain as test data[2], which can b
   write.csv(data1,paste(path,file_cell,sep = "/"),quote = FALSE)
   data2 = log1p(log1p(sweep(counts,1,rowSums(counts),FUN = "/")*1e4))
   pca = prcomp(data2, scale=TRUE)
-  pca.var <- pca$sdev^2 
-  pca.var.per <- pca.var/sum(pca.var)
+  pca.var = pca$sdev^2 
+  pca.var.per = pca.var/sum(pca.var)
   data_pca = pca$x[,1:500]
   write.csv(data_pca,paste(path,file_gene,sep = "/"),quote = FALSE)
   print("Data Trasformation Completed!")
@@ -109,8 +109,8 @@ Here we used the scRNA-seq dataset from mouse brain as test data[2], which can b
   write.csv(data1,paste(path,file_cell,sep = "/"),quote = FALSE)
   data2 = log1p(log1p(sweep(counts,1,rowSums(counts),FUN = "/")*1e4))
   pca = prcomp(data2, scale=TRUE)
-  pca.var <- pca$sdev^2 
-  pca.var.per <- pca.var/sum(pca.var)
+  pca.var = pca$sdev^2 
+  pca.var.per = pca.var/sum(pca.var)
   data_pca = pca$x[,1:500]
   write.csv(data_pca,paste(path,file_gene,sep = "/"),quote = FALSE)
   print("Data Trasformation Completed!")
