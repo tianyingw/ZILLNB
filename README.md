@@ -12,12 +12,12 @@ Single-cell RNA sequencing (scRNA-seq) data has multiple sources of heterogeneit
 * Python packages: numpy, pytorch, pandas, sklearn
 
 ## Core idea
-![outline_fig1_v2](https://github.com/tianyingw/ZILLNB/fig/outline_fig1_v2.png)
+![outline_fig1_v2](https://github.com/tianyingw/ZILLNB/blob/main/fig/outline_fig1_v2.png)
 
 Structural illustration of link function in ZINB model fitting. The green square is the raw data. Blue squares are parameters to be learned. Orange squares are fixed. Red dashed squares have initializations learned from neural networks.
 
 ## 1 Introduction to ZILLNB
-![fig1_14_7](https://github.com/user-attachments/assets/8ec08e71-8d38-4128-950d-ca00ece089df)
+![fig1_v15_1](https://github.com/tianyingw/ZILLNB/blob/main/fig/fig1_v15_1.jpg)
 The proposed ZILLNB model consists of three key components. First, we employ a deep learning approach that integrates InfoVAE and GAN to extract latent cell-wise and gene-wise information simultaneously. Second, these learned latent factor matrices are used to fit a zero-inflated negative binomial (ZINB) model, where the latent factors and the coefficients of interest are iteratively updated using the expectation-maximization (EM) algorithm. This process removes noise introduced by cell-specific sampling effects (e.g., uneven library sizes) and gene-specific variation (e.g., heterogeneity across genes). The adjusted mean parameters are then used to generate a dense denoised and imputed matrix. Additionally, we provide a method to recover the count matrix based on the denoised distribution. For more information on COMSE, we recommend the user to check the following article:
 > ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework(https://doi.org/xxxxx)[1]
 
