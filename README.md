@@ -5,7 +5,7 @@ ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statist
 
 ## Abstract
 
-Single-cell RNA sequencing (scRNA-seq) data has multiple sources of heterogeneity, like sequencing platform, sequencing strategy, experimental environment, biological materials, etc. We want to design a statistical model using the ZINB model to handle the excessive zeros, aiming to remove heterogeneity. The ZILLNB model is designed to effectively impute single-cell RNA sequencing (scRNA-seq) data by leveraging a zero-inflated negative binomial framework. Its architecture integrates cell-level (V matrix) and gene-level (U matrix) information, allowing for the modeling of complex biological processes and reducing technical noise.
+Single-cell RNA sequencing (scRNA-seq) data has multiple sources of heterogeneity, like sequencing platform, sequencing strategy, experimental environment, biological materials, etc. We want to design a statistical model using the ZINB model to handle the excessive zeros, aiming to remove heterogeneity. The ZILLNB model is designed to effectively impute scRNA-seq data by leveraging a zero-inflated negative binomial (ZINB) framework. Its architecture integrates cell-level (V matrix) and gene-level (U matrix) information, allowing for the modeling of complex biological processes and reducing technical noise.
 
 ## Package
 * R packages: gsl, turner,pscl, doParallel, optimParallel,dplyr, Matrix
@@ -18,7 +18,7 @@ Structural illustration of link function in ZINB model fitting. The green square
 
 ## 1 Introduction to ZILLNB
 ![fig1_v15_1](https://github.com/tianyingw/ZILLNB/blob/main/fig/fig1_v15_1.jpg)
-The proposed ZILLNB model consists of three key components. First, we employ a deep learning approach that integrates InfoVAE and GAN to extract latent cell-wise and gene-wise information simultaneously. Second, these learned latent factor matrices are used to fit a zero-inflated negative binomial (ZINB) model, where the latent factors and the coefficients of interest are iteratively updated using the expectation-maximization (EM) algorithm. This process removes noise introduced by cell-specific sampling effects (e.g., uneven library sizes) and gene-specific variation (e.g., heterogeneity across genes). The adjusted mean parameters are then used to generate a dense denoised and imputed matrix. Additionally, we provide a method to recover the count matrix based on the denoised distribution. For more information on COMSE, we recommend the user to check the following article:
+The proposed zero-inflated latent factors learning-based negative binomial (ZILLNB) model consists of three key components. First, we employ a deep learning approach that integrates InfoVAE and GAN to extract latent cell-wise and gene-wise information simultaneously. Second, these learned latent factor matrices are used to fit a ZINB model, where the latent factors and the coefficients of interest are iteratively updated using the expectation-maximization (EM) algorithm. This process removes noise introduced by cell-specific sampling effects (e.g., uneven library sizes) and gene-specific variation (e.g., heterogeneity across genes). The adjusted mean parameters are then used to generate a dense denoised and imputed matrix. For more information, we recommend the user to check the following article:
 > ZILLNB: Denoising Single-cell RNA-Seq Data with a Deep Learning-embedded Statistical Framework(https://doi.org/xxxxx)[1]
 
 ## 2 Requirements
