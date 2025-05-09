@@ -28,9 +28,9 @@ The proposed ZILLNB model consists of three key components. First, we employ a d
 For the R platform, the core dependent packages are as follows: 
 
 ``` R
-packages <- c("gsl", "pscl", "turner", "dplyr", "Matrix", "doParallel", "optimParallel")
-installed_packages <- installed.packages()[, "Package"]
-packages_to_install <- setdiff(packages, installed_packages)
+packages = c("gsl", "pscl", "turner", "dplyr", "Matrix", "doParallel", "optimParallel")
+installed_packages = installed.packages()[, "Package"]
+packages_to_install = setdiff(packages, installed_packages)
 if(length(packages_to_install) > 0) {
   install.packages(packages_to_install)
 } else {
