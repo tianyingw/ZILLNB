@@ -12,7 +12,7 @@ Single-cell RNA sequencing (scRNA-seq) data has multiple sources of heterogeneit
 * Python packages: numpy, pytorch, pandas, sklearn
 
 ## Core idea
-![outline_fig1_v2](https://github.com/user-attachments/assets/b25e4460-138b-4625-a993-b77f7bd63561)
+![outline_fig1_v2](https://github.com/tianyingw/ZILLNB/fig/outline_fig1_v2.png)
 
 Structural illustration of link function in ZINB model fitting. The green square is the raw data. Blue squares are parameters to be learned. Orange squares are fixed. Red dashed squares have initializations learned from neural networks.
 
